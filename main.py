@@ -4,6 +4,7 @@ from background import Background;
 import game_functions as gf;
 from pygame.sprite import Group, groupcollide
 from zombie import Zombie;
+from square import Square;
 
 pygame.init();
 game_settings = Settings();
@@ -17,11 +18,16 @@ plants = Group();
 squares = Group();
 bullets = Group()
 
+# Load up squares with our vars
+for i in range(0,5):
+	for j in range(0,9):
+		squares.add(Square(screen,game_settings,i, j));
+
 def run_game():
 	tick = 0;
 	while 1:
-		gf.check_events(screen,game_settings);
-		gf.update_screen(screen,game_settings,background,zombies);
+		gf.check_events(screen,game_settings, squares);
+		gf.update_screen(screen,game_settings,background,zombies,squares);
 		tick += 1;
 		if tick % 30 == 0:
 			zombies.add(Zombie(screen,game_settings.zombie_speed,game_settings.zombie_health));
