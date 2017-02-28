@@ -6,6 +6,7 @@ from pygame.sprite import Group, groupcollide
 from zombie import Zombie;
 from square import Square;
 
+
 pygame.init();
 game_settings = Settings();
 screen = pygame.display.set_mode(game_settings.screen_size);
@@ -26,11 +27,14 @@ for i in range(0,5):
 def run_game():
 	tick = 0;
 	while 1:
-		gf.check_events(screen,game_settings, squares);
-		gf.update_screen(screen,game_settings,background,zombies,squares);
+		gf.check_events(screen,game_settings, squares, plants);
+		gf.update_screen(screen,game_settings,background,zombies,squares, plants);
 		tick += 1;
 		if tick % 30 == 0:
 			zombies.add(Zombie(screen,game_settings.zombie_speed,game_settings.zombie_health));
+
 		pygame.display.flip();
+
+
 
 run_game();
