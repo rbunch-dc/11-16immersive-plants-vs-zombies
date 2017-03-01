@@ -8,6 +8,8 @@ class Settings():
 		self.bg_color = (82,111,53);
 		self.zombie_speed = 5;
 		self.zombie_health = 5;
+		self.game_active = True;
+
 		# square stuff
 		self.squares = {
 			"start_left": 367,

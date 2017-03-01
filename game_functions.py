@@ -37,6 +37,8 @@ def update_screen(screen,game_settings,background,zombies,squares,plants,bullets
 	for zombie in zombies.sprites():
 		zombie.update_me();
 		zombie.draw_me();
+		if zombie.rect.left <= zombie.screen_rect.left:
+			game_settings.game_active = False;
 
 	for plant in plants:
 		plant.draw_me();
