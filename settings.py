@@ -12,7 +12,7 @@ class Settings():
 		self.squares = {
 			"start_left": 367,
 			"start_top": 245,
-			"square_width": 110,
+			"square_width": 115,
 			"square_height": 105,
 			"rows": [
 				245,
@@ -21,4 +21,5 @@ class Settings():
 				560,
 				665
 			]
-		}
+		};
+		self.highlighted_square = 0;
