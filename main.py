@@ -30,7 +30,7 @@ def run_game():
 		gf.update_screen(screen,game_settings,background,zombies,squares,plants,bullets,tick);
 		tick += 1;
 		if tick % 30 == 0:
-			zombies.add(Zombie(screen,game_settings.zombie_speed,game_settings.zombie_health));
+			zombies.add(Zombie(screen,game_settings));
 
 		zombies_hit = groupcollide(zombies, bullets, False, True);
 		# print zombies_hit;

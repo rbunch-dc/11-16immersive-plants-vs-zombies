@@ -12,6 +12,7 @@ class Bullet(Sprite):
 
 		self.rect.centerx = plant.rect.centerx;
 		self.rect.top = plant.rect.top + 20;
+		self.yard_row = plant.yard_row;
 
 		self.x = self.rect.x;
 		self.y = self.rect.y;
