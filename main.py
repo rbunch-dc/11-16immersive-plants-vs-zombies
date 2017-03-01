@@ -32,13 +32,18 @@ def run_game():
 		if tick % 30 == 0:
 			zombies.add(Zombie(screen,game_settings));
 
-		zombies_hit = groupcollide(zombies, bullets, False, True);
+		zombies_hit = groupcollide(zombies, bullets, False, False);
 		# print zombies_hit;
 		for zombie in zombies_hit:
-			print zombie;
-			zombie.hit(1);
-			if(zombie.health <= 0):
-				zombies.remove(zombie);
+			# print zombie;
+			# print zombies_hit[zombie];
+			if zombie.yard_row == zombies_hit[zombie][0].yard_row:
+				# print "Same row!!!";
+				bullets.remove(zombies_hit[zombie][0]);
+				zombie.hit(1);
+				if(zombie.health <= 0):
+					zombies.remove(zombie);
+					game_settings.zombie_in_row[zombie.yard_row] -= 1;
 
 		pygame.display.flip();
 

@@ -42,7 +42,7 @@ def update_screen(screen,game_settings,background,zombies,squares,plants,bullets
 		plant.draw_me();
 		# print plant.yard_row;
 		if tick % 20 == 0:
-			if game_settings.zombie_in_row[plant.yard_row]:
+			if game_settings.zombie_in_row[plant.yard_row] > 0:
 				bullets.add(Bullet(screen,plant));
 
 	for bullet in bullets.sprites():
