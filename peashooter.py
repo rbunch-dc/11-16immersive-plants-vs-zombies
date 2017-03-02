@@ -1,4 +1,6 @@
-import pygame;
+# import pygame;
+import pyjsdl as pygame
+
 from pygame.sprite import Sprite;
 from plant import Plant;
 

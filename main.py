@@ -1,4 +1,5 @@
-import pygame;
+# import pygame;
+import pyjsdl as pygame
 from settings import Settings;
 from background import Background;
 import game_functions as gf;
@@ -8,6 +9,7 @@ from square import Square;
 from plant_icon import Plant_Icon;
 import time;
 
+pyjsdl.display.setup(run, images)
 pygame.init();
 game_settings = Settings();
 screen = pygame.display.set_mode(game_settings.screen_size);

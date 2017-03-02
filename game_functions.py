@@ -1,5 +1,7 @@
 import sys;
-import pygame;
+# import pygame;
+import pyjsdl as pygame
+
 from peashooter import Peashooter;
 from gatling import Gatling;
 from sunflower import Sunflower

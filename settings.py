@@ -1,4 +1,6 @@
-import pygame;
+# import pygame;
+import pyjsdl as pygame
+
 
 class Settings():
 	def __init__(self):
