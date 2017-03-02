@@ -31,8 +31,8 @@ for i in range(0,5):
 def run_game():
 	tick = 0;
 	while 1:
+		gf.check_events(screen,game_settings, squares, plants,bullets,icons);
 		if game_settings.game_active:
-			gf.check_events(screen,game_settings, squares, plants,bullets,icons);
 			tick += 1;
 			if tick % 30 == 0:
 				zombies.add(Zombie(screen,game_settings));

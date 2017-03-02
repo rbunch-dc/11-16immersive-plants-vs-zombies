@@ -10,32 +10,33 @@ def check_events(screen, game_settings,squares,plants,bullets,icons):
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			sys.exit()
-		elif event.type == pygame.MOUSEBUTTONDOWN:
-			mouse_x,mouse_y = pygame.mouse.get_pos();
-			# print mouse_x;
-			# print mouse_y;
-			for square in squares:
-				if square.rect.collidepoint(mouse_x,mouse_y):
-					print "Square: ",square.square_number;
-					if(game_settings.chosen_plant == 1):
-						plants.add(Peashooter(screen,square));
-					elif(game_settings.chosen_plant == 2):
-						plants.add(Gatling(screen,square));
-					elif(game_settings.chosen_plant == 3):
-						plants.add(Sunflower(screen,square));
+		if game_settings.game_active:
+			if event.type == pygame.MOUSEBUTTONDOWN:
+				mouse_x,mouse_y = pygame.mouse.get_pos();
+				# print mouse_x;
+				# print mouse_y;
+				for square in squares:
+					if square.rect.collidepoint(mouse_x,mouse_y):
+						print "Square: ",square.square_number;
+						if(game_settings.chosen_plant == 1):
+							plants.add(Peashooter(screen,square));
+						elif(game_settings.chosen_plant == 2):
+							plants.add(Gatling(screen,square));
+						elif(game_settings.chosen_plant == 3):
+							plants.add(Sunflower(screen,square));
 
-			for icon in icons:
-				if icon.rect.collidepoint(mouse_x,mouse_y):
-					game_settings.chosen_plant = icon.slot
-					# print game_settings.chosen_plant;
-					# print "You clicked: ",icon.image;
-					# plants.add(Peashooter(screen,square));		
-		elif event.type == pygame.MOUSEMOTION:
-			# print event.pos
-			for square in squares:
-				if square.rect.collidepoint(event.pos):
-					game_settings.highlighted_square = square;
-					# print game_settings.highlighted_square;
+				for icon in icons:
+					if icon.rect.collidepoint(mouse_x,mouse_y):
+						game_settings.chosen_plant = icon.slot
+						# print game_settings.chosen_plant;
+						# print "You clicked: ",icon.image;
+						# plants.add(Peashooter(screen,square));		
+			elif event.type == pygame.MOUSEMOTION:
+				# print event.pos
+				for square in squares:
+					if square.rect.collidepoint(event.pos):
+						game_settings.highlighted_square = square;
+						# print game_settings.highlighted_square;
 
 def update_screen(screen,game_settings,background,zombies,squares,plants,bullets,tick,icons):
 	screen.blit(background.image, background.rect);
@@ -49,7 +50,9 @@ def update_screen(screen,game_settings,background,zombies,squares,plants,bullets
 
 	# draw zombies
 	for zombie in zombies.sprites():
-		zombie.update_me();
+		# Only update the zombie's locaiton if the game ins't over
+		if game_settings.game_active:
+			zombie.update_me();
 		zombie.draw_me();
 		if zombie.rect.left <= zombie.screen_rect.left:
 			game_settings.game_active = False;
