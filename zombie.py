@@ -19,13 +19,20 @@ class Zombie(Sprite):
 		game_settings.zombie_in_row[self.yard_row] += 1;
 
 		self.x = float(self.rect.x);
+		self.moving = True;
+		self.started_eating = 0;
+		self.damage_time = 2;
 
 	def update_me(self):
-		self.x -= self.speed * 1;
-		self.rect.x = self.x;
+		if(self.moving):
+			self.x -= self.speed * 1;
+			self.rect.x = self.x;
 
 	def draw_me(self):
 		self.screen.blit(self.image, self.rect);
 
 	def hit(self, damage):
 		self.health -= damage;
+
+	def zombie_chomp(self, plant):
+		plant.health -= 1;

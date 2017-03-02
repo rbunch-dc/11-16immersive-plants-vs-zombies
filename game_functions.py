@@ -56,6 +56,8 @@ def update_screen(screen,game_settings,background,zombies,squares,plants,bullets
 		zombie.draw_me();
 		if zombie.rect.left <= zombie.screen_rect.left:
 			game_settings.game_active = False;
+		# Start moving. If they are collided, it will switch back to False in main.py
+		zombie.moving = True;
 
 	for plant in plants:
 		plant.draw_me();

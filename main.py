@@ -6,6 +6,7 @@ from pygame.sprite import Group, groupcollide
 from zombie import Zombie;
 from square import Square;
 from plant_icon import Plant_Icon;
+import time;
 
 pygame.init();
 game_settings = Settings();
@@ -50,6 +51,40 @@ def run_game():
 						zombies.remove(zombie);
 						game_settings.zombie_in_row[zombie.yard_row] -= 1;
 						game_settings.zombies_killed += 1;
+			# Create a dictionary with a key of Zombie and a value of a list of Plants that zombie has colided with
+			zombies_eating = groupcollide(zombies, plants, False, False);
+			# Loop through the dictionary
+			for zombie in zombies_eating:
+				# Set a var for the Plant (to save our eyes)
+				damaged_plant = zombies_eating[zombie][0];
+				# Check to see if the zombie and plant are in the same row
+				if zombie.yard_row == damaged_plant.yard_row:
+					# Zombie has run into a plant in it's row
+					# start/continue eating... stop moving if neccessary
+					zombie.moving = False;
+					# Check to see if zombie takes a bite
+					if time.time() - zombie.started_eating > zombie.damage_time:
+						# print "Zombie just took a bite";
+						# Run chomp
+						zombie.zombie_chomp(damaged_plant);
+						# plant.take_damage();
+						# update zombies last bite time
+						zombie.started_eating = time.time()
+						# remove the plant if it's 0 or below
+						if damaged_plant.health <= 0:
+							plants.remove(damaged_plant);
+							# start the zombie march again
+							zombie.moving = True;
+
+# zombies_eating = {
+# 	"key": 2,
+# 	<Zombie>: [
+# 			<Plant>,
+# 			<Plant>,
+# 			<Plant>,
+# 			<Plant>
+# 		]
+# }
 
 		gf.update_screen(screen,game_settings,background,zombies,squares,plants,bullets,tick,icons);		
 		pygame.display.flip();
