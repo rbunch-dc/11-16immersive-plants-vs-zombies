@@ -48,6 +48,7 @@ def run_game():
 					if(zombie.health <= 0):
 						zombies.remove(zombie);
 						game_settings.zombie_in_row[zombie.yard_row] -= 1;
+						game_settings.zombies_killed += 1;
 
 		gf.update_screen(screen,game_settings,background,zombies,squares,plants,bullets,tick,icons);		
 		pygame.display.flip();

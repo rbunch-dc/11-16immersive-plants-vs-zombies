@@ -64,3 +64,12 @@ def update_screen(screen,game_settings,background,zombies,squares,plants,bullets
 	for bullet in bullets.sprites():
 		bullet.update_me();
 		bullet.draw_me();
+
+	score_font = pygame.font.SysFont("monospace",36);
+	# render a font takes 3 params:
+	# 1. What text.
+	# 2. I cant remember
+	# 3. Color
+	score_render = score_font.render("Zombies Killed: "+str(game_settings.zombies_killed) +"!!!",1,(255,215,0));
+	screen.blit(score_render,(100,100));
+
