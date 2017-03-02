@@ -14,7 +14,8 @@ pygame.display.set_caption("DC PvZ clone");
 background = Background(game_settings);
 peashooter_icon = Plant_Icon(game_settings,'peashooter-icon.png',1);
 gatling_icon = Plant_Icon(game_settings,'gatling-icon.png',2);
-icons = [peashooter_icon,gatling_icon];
+sunflower_icon = Plant_Icon(game_settings,'sunflower.png',3);
+icons = [peashooter_icon,gatling_icon,sunflower_icon];
 
 # All our groups
 zombies = Group();

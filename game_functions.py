@@ -2,6 +2,7 @@ import sys;
 import pygame;
 from peashooter import Peashooter;
 from gatling import Gatling;
+from sunflower import Sunflower
 from bullet import Bullet;
 import time;
 
@@ -20,10 +21,14 @@ def check_events(screen, game_settings,squares,plants,bullets,icons):
 						plants.add(Peashooter(screen,square));
 					elif(game_settings.chosen_plant == 2):
 						plants.add(Gatling(screen,square));
+					elif(game_settings.chosen_plant == 3):
+						plants.add(Sunflower(screen,square));
+
 			for icon in icons:
 				if icon.rect.collidepoint(mouse_x,mouse_y):
 					game_settings.chosen_plant = icon.slot
-					print "You clicked: ",icon.image;
+					# print game_settings.chosen_plant;
+					# print "You clicked: ",icon.image;
 					# plants.add(Peashooter(screen,square));		
 		elif event.type == pygame.MOUSEMOTION:
 			# print event.pos
@@ -56,10 +61,16 @@ def update_screen(screen,game_settings,background,zombies,squares,plants,bullets
 		# is it time to shoot?
 		should_shoot = time.time() - plant.last_shot > plant.shoot_speed
 		# print time.time() - plant.last_shot;
+		can_shoot = plant.can_shoot;
 		in_my_row = game_settings.zombie_in_row[plant.yard_row] > 0
-		if should_shoot and in_my_row:
+		if should_shoot and can_shoot and in_my_row:
 			bullets.add(Bullet(screen,plant));
 			plant.last_shot = time.time();
+		can_make_sun = plant.can_make_sun;
+		should_make_sun = time.time() - plant.last_sun > plant.sun_speed;
+		if can_make_sun and should_make_sun:
+			plant.make_sun(game_settings);
+			plant.last_sun = time.time();
 
 	for bullet in bullets.sprites():
 		bullet.update_me();
@@ -73,3 +84,5 @@ def update_screen(screen,game_settings,background,zombies,squares,plants,bullets
 	score_render = score_font.render("Zombies Killed: "+str(game_settings.zombies_killed) +"!!!",1,(255,215,0));
 	screen.blit(score_render,(100,100));
 
+	sun_render = score_font.render("Collected Sun: "+str(game_settings.total_sun),1,(255,215,0));
+	screen.blit(sun_render,(100,150));

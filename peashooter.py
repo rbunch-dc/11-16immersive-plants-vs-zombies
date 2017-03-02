@@ -10,5 +10,9 @@ class Peashooter(Plant):
 		self.screen = screen;
 		self.square = square;
 		self.name = "peashooter";
+		self.can_shoot = True;
+		self.can_make_sun = False;
+		self.sun_speed = 0;
+
 
 		super(Peashooter, self).__init__();
